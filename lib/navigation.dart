@@ -1,26 +1,52 @@
-import 'dart:developer';
-import 'package:code_initial/presentation/pages/register/register_page.dart';
 import 'package:get/get.dart';
 
-class Nav {
-  static List<GetPage> routes = [
-    GetPage(
-      name: Routes.REGISTER,
-      page: () => RegisterPage(),
-    ),
+// === Import de tes propres pages ===
+import 'presentation/pages/page_splash.dart';
+import 'presentation/pages/page_connexion.dart';
+import 'presentation/pages/page_inscription.dart';
 
-  ];
-}
-
+// === Import de la page Register qui était déjà dans le dépôt ===
+import 'presentation/pages/register/register_page.dart';
 
 class Routes {
+  // ROUTES
+  static const splash = "/";
+  static const connexion = "/connexion";
+  static const inscription = "/inscription";
+  static const register = "/register";
+
+  // ROUTE INITIALE
   static Future<String> get initialRoute async {
-
-      return REGISTER;
+    // Tu peux mettre la logique que tu veux ici
+    return splash;
   }
+}
 
-  static const String MAIN = "/";
+class Nav {
+  static final routes = [
 
-  static const REGISTER = '/register';
+    // === Route Splash ===
+    GetPage(
+      name: Routes.splash,
+      page: () => const PageSplash(),
+    ),
 
+    // === Route Connexion ===
+    GetPage(
+      name: Routes.connexion,
+      page: () => const PageConnexion(),
+    ),
+
+    // === Route Inscription ===
+    GetPage(
+      name: Routes.inscription,
+      page: () => const PageInscription(),
+    ),
+
+    // === Route REGISTER (déjà présente dans le dépôt) ===
+    GetPage(
+      name: Routes.register,
+      page: () => RegisterPage(),
+    ),
+  ];
 }
