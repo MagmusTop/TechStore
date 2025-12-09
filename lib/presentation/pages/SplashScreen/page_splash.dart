@@ -14,7 +14,7 @@ class _PageSplashState extends State<PageSplash> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 3), () {
-      Get.offNamed(Routes.connexion);
+      Get.offNamed(Routes.CONNEXION);
     });
 
 

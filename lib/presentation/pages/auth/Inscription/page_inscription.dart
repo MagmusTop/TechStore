@@ -146,7 +146,7 @@ class _PageInscriptionState extends State<PageInscription> {
                   const Text("Vous avez déjà un compte ?"),
                   TextButton(
                     onPressed: () {
-                      Get.toNamed(Routes.connexion);
+                      Get.toNamed(Routes.CONNEXION);
                     },
                     child: const Text("Se connecter"),
                   ),

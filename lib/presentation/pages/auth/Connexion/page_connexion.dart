@@ -105,7 +105,7 @@ class _PageConnexionState extends State<PageConnexion> {
                 const Text("Créer un compte ?"),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed(Routes.inscription);
+                    Get.toNamed(Routes.INSCRIPTION);
                   },
                   child: const Text("S'inscrire"),
                 ),
