@@ -79,7 +79,9 @@ class _PageConnexionState extends State<PageConnexion> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed(Routes.MDPFORGET);
+                },
                 child: const Text("Mot de passe oublié ?"),
               ),
             ),
@@ -89,7 +91,10 @@ class _PageConnexionState extends State<PageConnexion> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  // Simulation connexion réussie
+                  Get.snackbar('Succès', 'Connexion réussie !');
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
                 ),

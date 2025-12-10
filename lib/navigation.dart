@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 // === Import pages ===
-import 'presentation/pages/SPLASHScreen/page_SPLASH.dart';
+import 'presentation/pages/SplashScreen/page_splash.dart';
 import 'presentation/pages/Auth/CONNEXION/page_CONNEXION.dart';
 import 'presentation/pages/Auth/INSCRIPTION/page_INSCRIPTION.dart';
 import 'package:code_initial/presentation/pages/register/register_page.dart';
@@ -29,7 +29,6 @@ class Routes {
   static Future<String> get initialRoute async {
     // Tu peux mettre la logique que tu veux ici
     return SPLASH;
-    return MDPFORGET;
   }
 }
 
@@ -37,7 +36,7 @@ class Nav {
   static List<GetPage> routes = [
     GetPage(
       name: Routes.SPLASH,
-      page: () => const PageConnexion(),
+      page: () => const PageSplash(),
     ),
     GetPage(
       name: Routes.CONNEXION,
@@ -45,17 +44,20 @@ class Nav {
     ),
     GetPage(
       name: Routes.INSCRIPTION,
-      page: () => PageInscription (),
+      page: () => PageInscription(),
     ),
     GetPage(
       name: Routes.MDPFORGET,
-      page: ()=>MotDePasseOubliePage(),
-      binding:MotDePasseOublieBinding(),
+      page: () => MotDePasseOubliePage(),
+      binding: MotDePasseOublieBinding(),
     ),
     GetPage(
       name: Routes.OTPCODE,
-      page: ()=>CodeVerificationPage(),
-      binding:CodeVerificationBinding(),
+      page: () => CodeVerificationPage(),
+    ),
+    GetPage(
+      name: Routes.REGISTER,
+      page: () => RegisterPage(),
     ),
   ];
 }
