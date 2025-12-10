@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 // === Import pages ===
-import 'presentation/pages/SplashScreen/page_splash.dart';
+import 'presentation/pages/splashscreen/page_splash.dart';
 import 'presentation/pages/Auth/CONNEXION/page_CONNEXION.dart';
 import 'presentation/pages/Auth/INSCRIPTION/page_INSCRIPTION.dart';
 import 'package:code_initial/presentation/pages/register/register_page.dart';
