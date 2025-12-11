@@ -3,52 +3,53 @@ import 'package:get/get.dart';
 
 class AccueilController extends GetxController {
   final RxInt selectedIndex = 0.obs;
+  final RxBool isDarkMode = false.obs;
+  final RxInt currentPromoIndex = 0.obs;
+  final PageController pageController = PageController();
 
   void changeTabIndex(int index) {
     selectedIndex.value = index;
   }
 
-  // Liste des meilleures ventes
+  void setTheme(bool darkMode) {
+    isDarkMode.value = darkMode;
+  }
+
+  // Liste des meilleures ventes - TOUTES LES VALEURS DÉFINIES
   final List<Map<String, dynamic>> bestSellers = [
     {
-      'title': 'iPhone 14 Pro Max',
-      'subtitle': '1To • 16Go RAM',
+      'title': 'iPhone 14 Pro Max | 1To |16GB RAM',
       'price': '702.500',
       'rating': 4.6,
-      'reviews': '(128)',
-      'icon': Icons.phone_iphone,
-      'iconColor': Color(0xFF2196F3),
+      'reviews': '(4.6)',
+      'deliveryInfo': 'Livraison gratuite',
     },
     {
-      'title': 'JBL Charge 6',
-      'subtitle': 'Portable Waterproof',
+      'title': 'JBL Charge 6 | Portable Waterproof',
       'price': '52.500',
-      'rating': 2.7,
-      'reviews': '(45)',
-      'icon': Icons.speaker,
-      'iconColor': Color(0xFFFF9800),
-    },
-    {
-      'title': 'AirPods Pro',
-      'subtitle': 'ANC • 24h battery',
-      'price': '250.000',
-      'rating': 4.5,
-      'reviews': '(89)',
-      'icon': Icons.headphones,
-      'iconColor': Color(0xFF4CAF50),
+      'rating': 3.7,
+      'reviews': '(3.7)',
+      'deliveryInfo': 'Livraison à partir de 1.500 XOF/km',
     },
   ];
 
-  // Liste des catégories - CORRIGÉ: Icônes comme IconData, pas String
+  // Liste des catégories
   final List<Map<String, dynamic>> categories = [
-    {'title': 'Casques', 'icon': Icons.headphones, 'color': 0xFF4FC3F7},
-    {'title': 'Laptop', 'icon': Icons.laptop, 'color': 0xFF9575CD},
-    {'title': 'Téléphones', 'icon': Icons.phone_iphone, 'color': 0xFF81C784},
-    {'title': 'Consoles de Jeux', 'icon': Icons.sports_esports, 'color': 0xFFFFB74D},
-    {'title': 'Casques XR', 'icon': Icons.view_in_ar, 'color': 0xFFF06292}, // Changé vr_off_outlined par view_in_ar
-    {'title': 'Montres', 'icon': Icons.watch, 'color': 0xFF64B5F6},
+    {'title': 'Casques'},
+    {'title': 'Laptop'},
+    {'title': 'Téléphones'},
+    {'title': 'Consoles de Jeux'},
+    {'title': 'Casques XR'},
+    {'title': 'Montres'},
   ];
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
+  }
 }
+
 class AccueilBinding extends Bindings {
   @override
   void dependencies() {

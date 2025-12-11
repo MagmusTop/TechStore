@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:code_initial/navigation.dart';
 
 class CodeVerificationController extends GetxController {
   final TextEditingController pinController = TextEditingController();
@@ -39,7 +40,7 @@ class CodeVerificationController extends GetxController {
     }
 
     // Vérification avec OTP fixe pour la démo
-    if (currentPin.value == "123456") {
+    if (currentPin.value == "12345") {
       hasError.value = false;
       Get.snackbar(
         "Succès",
@@ -47,8 +48,11 @@ class CodeVerificationController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.green,
         colorText: Colors.white,
-      );
 
+      );
+      Get.toNamed(
+          Routes.HOME
+      );
       // Ici, vous pouvez naviguer vers la page suivante (réinitialisation de mot de passe)
       // Get.offNamed('/reset-password', arguments: {'email': email.value});
 

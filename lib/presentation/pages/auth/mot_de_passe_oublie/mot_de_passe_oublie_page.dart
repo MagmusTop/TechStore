@@ -33,13 +33,17 @@ class MotDePasseOubliePage extends GetView<MotDePasseOublieController> {
               const SizedBox(height: 40),
               Text(
                 "Récupération de votre compte",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24, 
+                    fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 10),
               Text(
                 "Veuillez entrer votre e-mail. Un code vous sera envoyé à cette adresse.",
-                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                style: TextStyle(fontSize: 15,
+                  color: Colors.grey[600],
+                  fontWeight: FontWeight.w600,),
+
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
@@ -66,7 +70,7 @@ class MotDePasseOubliePage extends GetView<MotDePasseOublieController> {
                     onPressed:
                     controller.isLoading.value ? null : controller.sendCode,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue[700],
+                      backgroundColor: const Color(0xFF5B5FFF),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),

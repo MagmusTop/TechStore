@@ -21,6 +21,7 @@ class CodeVerificationPage extends GetView<CodeVerificationController> {
       ),
       decoration: BoxDecoration(
         border: Border.all(color: const Color.fromRGBO(234, 239, 243, 1)),
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(20),
       ),
     );
@@ -80,18 +81,17 @@ class CodeVerificationPage extends GetView<CodeVerificationController> {
                 Obx(() {
                   return Pinput(
                     controller: controller.pinController,
-                    length: 6,
+                    length: 5, // ✅ 5 champs
                     defaultPinTheme: defaultPinTheme,
                     focusedPinTheme: focusedPinTheme,
                     submittedPinTheme: submittedPinTheme,
                     errorPinTheme: errorPinTheme,
+                    forceErrorState: controller.hasError.value, // ✅ AJOUTER CETTE LIGNE
                     onChanged: (value) {
                       if (controller.hasError.value) {
                         controller.hasError.value = false;
                       }
                     },
-                    errorText:
-                    controller.hasError.value ? "Code incorrect" : null,
                     onCompleted: (pin) {
                       controller.verifyOtp();
                     },
@@ -102,18 +102,18 @@ class CodeVerificationPage extends GetView<CodeVerificationController> {
                 Obx(() {
                   if (controller.hasError.value) {
                     return const Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: EdgeInsets.only(top: 8, left: 20), // Aligné à gauche
                       child: Text(
-                        "Le code est incorrect. Essayez '123456' pour la démo.",
-                        textAlign: TextAlign.center,
+                        "Code incorrect.",
+                        textAlign: TextAlign.start,
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                     );
                   }
-                  return Container();
+                  return const SizedBox.shrink(); // Mieux que Container()
                 }),
                 const SizedBox(height: 20),
                 SizedBox(
@@ -128,33 +128,21 @@ class CodeVerificationPage extends GetView<CodeVerificationController> {
                       ),
                     ),
                     child: const Text(
-                      'Vérifier',
+                      'Envoyer',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Get.snackbar(
-                      "Info",
-                      "Pour la démo, utilisez le code: 123456",
-                      snackPosition: SnackPosition.BOTTOM,
-                    );
-                  },
-                  child: const Text(
-                    "Code de démonstration: 123456",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  child: const Text(
-                    "Retour à la page précédente",
-                    style: TextStyle(color: Colors.grey),
+                const SizedBox(height: 16),
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      // Logique renvoyer code
+                    },
+                    child: const Text(
+                      "Renvoyer le code",
+                      style: TextStyle(color: Colors.blue, fontSize: 14),
+                    ),
                   ),
                 ),
               ],
