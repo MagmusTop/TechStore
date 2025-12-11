@@ -11,6 +11,8 @@ import 'presentation/pages/Auth/INSCRIPTION/page_INSCRIPTION.dart';
 import 'package:code_initial/presentation/pages/register/register_page.dart';
 import 'package:code_initial/presentation/pages/auth/code_verification/code_verification_page.dart';
 import 'package:code_initial/presentation/pages/auth/mot_de_passe_oublie/mot_de_passe_oublie_page.dart';
+import 'package:code_initial/presentation/pages/home/root_screen.dart';
+import 'package:code_initial/presentation/pages/home/accueil_controller.dart';
 
 // === Import Controllers ===
 import 'package:code_initial/presentation/pages/auth/mot_de_passe_oublie/mot_de_passe_oublie_controller.dart';
@@ -36,6 +38,9 @@ class Routes {
 class Nav {
   static List<GetPage> routes = [
     GetPage(
+      name: Routes.HOME,
+      page: () => RootScreen(),
+      binding: AccueilBinding(), // Binding pour le contrôleur
       name: Routes.SPLASH,
       page: () => const PageSplash(),
     ),
@@ -61,6 +66,28 @@ class Nav {
       page: () => RegisterPage(),
     ),
     GetPage(
+      name: Routes.OTPCODE,
+      page: () => CodeVerificationPage(),
+      binding: CodeVerificationBinding(),
+    ),
+    GetPage(
+      name: Routes.MDPFORGET,
+      page: () => MotDePasseOubliePage(),
+      binding: MotDePasseOublieBinding(),
+    ),
+  ];
+}
+
+class Routes {
+  static Future<String> get initialRoute async {
+    return HOME;
+  }
+
+  static const HOME = "/home";
+  static const REGISTER = '/register';
+  static const OTPCODE = "/auth/code_verification";
+  static const MDPFORGET = "/auth/mot_de_passe_oublie";
+}
       name: Routes.CATALOGUE,
       page: () => const CataloguePage(),
       binding: BindingsBuilder(() {
