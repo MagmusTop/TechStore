@@ -72,28 +72,6 @@ class AccueilController extends GetxController {
       'deliveryInfo': 'Livraison à partir de 3.000 XOF/km',
       'freeDelivery': false,
     },
-    {
-      'title': 'JBL Charge 8 | Portable Waterproof',
-      'price': '52.500',
-      'rating': 2,
-      'reviews': '(3.7)',
-      'deliveryInfo': 'Livraison à partir de 1.500 XOF/km',
-    },
-    // Ajoutez plus d'éléments pour voir l'effet du défilement
-    {
-      'title': 'Samsung Galaxy S23 Ultra',
-      'price': '650.000',
-      'rating': 4.8,
-      'reviews': '(4.8)',
-      'deliveryInfo': 'Livraison gratuite',
-    },
-    {
-      'title': 'MacBook Pro M2',
-      'price': '1.200.000',
-      'rating': 4.9,
-      'reviews': '(4.9)',
-      'deliveryInfo': 'Livraison à partir de 2.500 XOF/km',
-    },
   ];
 
   // Liste des catégories
@@ -103,6 +81,7 @@ class AccueilController extends GetxController {
     {'title': 'Téléphones'},
     {'title': 'Consoles de Jeux'},
     {'title': 'Casques XR'},
+    {'title': 'Montres'},
   ];
 
   @override
@@ -112,34 +91,12 @@ class AccueilController extends GetxController {
     bestSellersScrollController.addListener(() {
       calculateScrollProgress();
     });
-    // Ajouter le listener seulement s'il n'est pas déjà attaché
-    if (!bestSellersScrollController.hasListeners) {
-      bestSellersScrollController.addListener(_updateScrollProgress);
-    }
-  }
-
-  void _updateScrollProgress() {
-    if (bestSellersScrollController.hasClients) {
-      final maxScroll = bestSellersScrollController.position.maxScrollExtent;
-      final currentScroll = bestSellersScrollController.offset;
-      scrollProgress.value = maxScroll > 0 ? currentScroll / maxScroll : 0.0;
-      update(); // Notifie GetBuilder
-    }
   }
 
   @override
   void onClose() {
     pageController.dispose();
     bestSellersScrollController.dispose();
-    if (bestSellersScrollController.hasListeners) {
-      bestSellersScrollController.removeListener(_updateScrollProgress);
-    }
-    if (!bestSellersScrollController.hasClients) {
-      bestSellersScrollController.dispose();
-    }
-    if (pageController.hasClients) {
-      pageController.dispose();
-    }
     super.onClose();
   }
 }

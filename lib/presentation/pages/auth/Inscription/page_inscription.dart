@@ -28,7 +28,7 @@ class PageInscription extends GetView<InscriptionController> {
                   "TechStore",
                   style: TextStyle(
                     fontFamily: "Roboto",
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 24,
                     letterSpacing: 0.5,
                   ),
@@ -68,8 +68,6 @@ class PageInscription extends GetView<InscriptionController> {
                     onPressed: () => controller.togglePasswordVisibility(),
                   ),
                 )),
-                const SizedBox(height: 16),
-                ),
                 const SizedBox(height: 22),
 
                 // Confirmer le mot de passe
@@ -89,8 +87,6 @@ class PageInscription extends GetView<InscriptionController> {
                   ),
                 )),
 
-                const SizedBox(height: 24),
-                Obx(() => SizedBox(
                 const SizedBox(height: 36),
                 SizedBox(
                   width: double.infinity,
@@ -124,7 +120,7 @@ class PageInscription extends GetView<InscriptionController> {
                       ),
                     ),
                   ),
-                )),
+                ),
                 const SizedBox(height: 24),
 
                 Row(
