@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:code_initial/presentation/pages/catalogue/catalogue_page.dart';
 import 'package:code_initial/presentation/pages/catalogue/catalogue_controller.dart';
 import 'package:code_initial/presentation/pages/profil/profil_page.dart';
@@ -9,9 +10,11 @@ import 'package:code_initial/presentation/pages/cart/cart_controller.dart';
 import 'package:code_initial/presentation/pages/home/root_screen.dart';
 
 // === Import pages ===
-import 'presentation/pages/splashscreen/page_splash.dart';
-import 'presentation/pages/Auth/CONNEXION/page_CONNEXION.dart';
-import 'presentation/pages/Auth/INSCRIPTION/page_INSCRIPTION.dart';
+import 'presentation/pages/SplashScreen/page_splash.dart';
+import 'presentation/pages/auth/Connexion/page_connexion.dart';
+import 'presentation/pages/auth/Inscription/page_inscription.dart';
+import 'package:code_initial/presentation/pages/auth/Inscription/inscription_controller.dart';
+import 'package:code_initial/presentation/pages/register/register_page.dart';
 import 'package:code_initial/presentation/pages/auth/code_verification/code_verification_page.dart';
 import 'package:code_initial/presentation/pages/auth/mot_de_passe_oublie/mot_de_passe_oublie_page.dart';
 
@@ -51,6 +54,9 @@ class Nav {
     GetPage(
       name: Routes.INSCRIPTION,
       page: () => const PageInscription(),
+      binding: BindingsBuilder((){
+        Get.lazyPut<InscriptionController>(() => InscriptionController());
+      }),
     ),
     GetPage(
       name: Routes.MDPFORGET,

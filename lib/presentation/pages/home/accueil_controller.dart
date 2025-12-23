@@ -17,6 +17,19 @@ class AccueilController extends GetxController {
     isDarkMode.value = darkMode;
   }
 
+  void calculateScrollProgress() {
+    if (bestSellersScrollController.hasClients) {
+      final maxScroll = bestSellersScrollController.position.maxScrollExtent;
+      final currentScroll = bestSellersScrollController.position.pixels;
+
+      if (maxScroll > 0) {
+        scrollProgress.value = currentScroll / maxScroll;
+      } else {
+        scrollProgress.value = 0.0;
+      }
+    }
+  }
+
   // Liste des meilleures ventes - TOUTES LES VALEURS DÉFINIES
   final List<Map<String, dynamic>> bestSellers = [
     {
@@ -74,32 +87,16 @@ class AccueilController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Ajouter le listener seulement s'il n'est pas déjà attaché
-    if (!bestSellersScrollController.hasListeners) {
-      bestSellersScrollController.addListener(_updateScrollProgress);
-    }
-  }
-
-  void _updateScrollProgress() {
-    if (bestSellersScrollController.hasClients) {
-      final maxScroll = bestSellersScrollController.position.maxScrollExtent;
-      final currentScroll = bestSellersScrollController.offset;
-      scrollProgress.value = maxScroll > 0 ? currentScroll / maxScroll : 0.0;
-      update(); // Notifie GetBuilder
-    }
+    // Écouter le défilement de la liste des meilleures ventes
+    bestSellersScrollController.addListener(() {
+      calculateScrollProgress();
+    });
   }
 
   @override
   void onClose() {
-    if (bestSellersScrollController.hasListeners) {
-      bestSellersScrollController.removeListener(_updateScrollProgress);
-    }
-    if (!bestSellersScrollController.hasClients) {
-      bestSellersScrollController.dispose();
-    }
-    if (pageController.hasClients) {
-      pageController.dispose();
-    }
+    pageController.dispose();
+    bestSellersScrollController.dispose();
     super.onClose();
   }
 }

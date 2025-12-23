@@ -28,7 +28,7 @@ class PageInscription extends GetView<InscriptionController> {
                   "TechStore",
                   style: TextStyle(
                     fontFamily: "Roboto",
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 24,
                     letterSpacing: 0.5,
                   ),
@@ -68,6 +68,7 @@ class PageInscription extends GetView<InscriptionController> {
                     onPressed: () {
                       controller.isPasswordVisible.toggle();
                     },
+                    onPressed: () => controller.togglePasswordVisibility(),
                   ),
                 )),
                 const SizedBox(height: 22),
@@ -88,6 +89,7 @@ class PageInscription extends GetView<InscriptionController> {
                     onPressed: () {
                       controller.isConfirmPasswordVisible.toggle();
                     },
+                    onPressed: () => controller.toggleConfirmPasswordVisibility(),
                   ),
                 )),
 
@@ -99,8 +101,11 @@ class PageInscription extends GetView<InscriptionController> {
                     onPressed: controller.isLoading.value
                         ? null
                         : () => controller.register(),
+                    onPressed: controller.isLoading.value ? null : () => controller.register(),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 37, 28, 217),
+                      backgroundColor: controller.isLoading.value
+                          ? Colors.grey
+                          : const Color.fromARGB(255, 37, 28, 217),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -124,6 +129,21 @@ class PageInscription extends GetView<InscriptionController> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
+                      width: 20,
+                      height: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                        : const Text(
+                      "S'inscrire",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 )),
                 const SizedBox(height: 24),
@@ -166,4 +186,3 @@ class PageInscription extends GetView<InscriptionController> {
     );
   }
 }
-
