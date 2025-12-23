@@ -204,9 +204,9 @@ class AccueilPage extends GetView<AccueilController> {
           height: 310,
           child: Scrollbar(
             controller: controller.bestSellersScrollController,
-            thumbVisibility: true, // Rend le scrollbar toujours visible
-            thickness: 8, // Épaisseur du scrollbar
-            radius: const Radius.circular(25), // Arrondi des bords
+            thumbVisibility: true,
+            thickness: 8,
+            radius: const Radius.circular(25),
             child:
             ListView.builder(
               controller: controller.bestSellersScrollController,
