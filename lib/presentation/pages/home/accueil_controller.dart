@@ -58,6 +58,18 @@ class AccueilController extends GetxController {
       'rating': 4.8,
       'deliveryInfo': 'Livraison à partir de 3.000 XOF/km',
       'freeDelivery': false,
+      'title': 'iPhone 14 Pro Max | 1To |16GB RAM',
+      'price': '702.500',
+      'rating': 4.6,
+      'reviews': '(4.6)',
+      'deliveryInfo': 'Livraison gratuite',
+    },
+    {
+      'title': 'JBL Charge 6 | Portable Waterproof',
+      'price': '52.500',
+      'rating': 3.7,
+      'reviews': '(3.7)',
+      'deliveryInfo': 'Livraison à partir de 1.500 XOF/km',
     },
   ];
 
@@ -100,6 +112,8 @@ class AccueilController extends GetxController {
     if (pageController.hasClients) {
       pageController.dispose();
     }
+  void onClose() {
+    pageController.dispose();
     super.onClose();
   }
 }
