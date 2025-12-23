@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:code_initial/presentation/pages/Auth/CONNEXION/page_CONNEXION.dart';
+import 'package:code_initial/presentation/pages/auth/Connexion/page_connexion.dart';
 
 class PageOnboarding extends StatefulWidget {
   const PageOnboarding({super.key});
