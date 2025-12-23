@@ -237,7 +237,7 @@ class AccueilPage extends GetView<AccueilController> {
               ),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final indicatorWidth = constraints.maxWidth * 0.3; // 30% de la largeur
+                  final indicatorWidth = constraints.maxWidth * 0.3;
                   final maxPosition = constraints.maxWidth - indicatorWidth;
                   final position = ctrl.scrollProgress.value * maxPosition;
                   
