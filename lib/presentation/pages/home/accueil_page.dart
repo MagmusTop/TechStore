@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'accueil_controller.dart';
+import '/utils/product_card.dart';
+import '/utils/custom_search_bar.dart';
+import '/utils/custom_bottom_navbar.dart';
 
 class AccueilPage extends GetView<AccueilController> {
-  @override
-  final AccueilController controller = Get.put(AccueilController());
   AccueilPage({super.key});
 
   @override
@@ -31,6 +32,7 @@ class AccueilPage extends GetView<AccueilController> {
           ),
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentRoute: '/home'),
     );
   }
 
@@ -96,6 +98,7 @@ class AccueilPage extends GetView<AccueilController> {
         ),
       ),
     );
+    return const CustomSearchBar();
   }
 
   Widget _buildPromoCarousel() {
@@ -106,7 +109,9 @@ class AccueilPage extends GetView<AccueilController> {
           child: PageView.builder(
             controller: controller.pageController,
             onPageChanged: (index) {
-              controller.currentPromoIndex.value = index;
+              if (controller.pageController.hasClients) {
+                controller.currentPromoIndex.value = index;
+              }
             },
             itemCount: 3,
             itemBuilder: (context, index) {
@@ -232,17 +237,25 @@ class AccueilPage extends GetView<AccueilController> {
           height: 310,
           child: ListView.builder(
             controller: controller.bestSellersScrollController, // Ajout du contrôleur
+            controller: controller.bestSellersScrollController,
             scrollDirection: Axis.horizontal,
             padding: const EdgeInsets.only(left: 20, right: 10),
             itemCount: controller.bestSellers.length,
             itemBuilder: (context, index) {
               final product = controller.bestSellers[index];
-              return _buildProductCard(
-                title: product['title'] ?? '',
-                price: product['price'] ?? '0',
-                rating: (product['rating'] ?? 0.0).toDouble(),
-                reviews: product['reviews'] ?? '(0)',
-                deliveryInfo: product['deliveryInfo'] ?? '',
+              return Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: SizedBox(
+                  width: 180,
+                  child: ProductCard(
+                    imagePath: product['imagePath'] ?? 'design/assets/Iphone14.png',
+                    title: product['title'] ?? '',
+                    price: product['price'] ?? '0',
+                    rating: (product['rating'] ?? 0.0).toDouble(),
+                    deliveryInfo: product['deliveryInfo'] ?? '',
+                    freeDelivery: product['freeDelivery'] ?? false,
+                  ),
+                ),
               );
             },
           ),
@@ -342,21 +355,35 @@ class AccueilPage extends GetView<AccueilController> {
                 // Prix
                 RichText(
                   text: TextSpan(
+        const SizedBox(height: 12),
+        // Indicateur de scroll horizontal
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: GetBuilder<AccueilController>(
+            builder: (ctrl) => Container(
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final indicatorWidth = constraints.maxWidth * 0.3; // 30% de la largeur
+                  final maxPosition = constraints.maxWidth - indicatorWidth;
+                  final position = ctrl.scrollProgress.value * maxPosition;
+                  
+                  return Stack(
                     children: [
-                      TextSpan(
-                        text: price,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' XOF',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600],
+                      AnimatedPositioned(
+                        duration: const Duration(milliseconds: 100),
+                        left: position,
+                        child: Container(
+                          width: indicatorWidth,
+                          height: 4,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF5B67FF),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
                         ),
                       ),
                     ],
@@ -383,37 +410,13 @@ class AccueilPage extends GetView<AccueilController> {
                 ),
                 const SizedBox(height: 5),
               ],
+                  );
+                },
+              ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStarRating(double rating) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(5, (index) {
-        if (index < rating.floor()) {
-          return const Icon(
-            Icons.star,
-            size: 13,
-            color: Colors.amber,
-          );
-        } else if (index < rating) {
-          return const Icon(
-            Icons.star_half,
-            size: 13,
-            color: Colors.amber,
-          );
-        } else {
-          return Icon(
-            Icons.star_border,
-            size: 13,
-            color: Colors.grey[400],
-          );
-        }
-      }),
+        ),
+      ],
     );
   }
 
@@ -426,8 +429,9 @@ class AccueilPage extends GetView<AccueilController> {
           const Text(
             "NOS CATEGORIES DE PRODUITS",
             style: TextStyle(
-              fontSize: 18,
               fontWeight: FontWeight.bold,
+              fontFamily: "Roboto",
+              fontSize: 18,
               color: Colors.black,
               letterSpacing: 0.5,
             ),
@@ -464,6 +468,17 @@ class AccueilPage extends GetView<AccueilController> {
         boxShadow: [
           BoxShadow(
             color: const Color(0xFF5B67FF).withOpacity(0.4), // Opacité augmentée
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0x99251CD9),
+            Color(0xFF251CD9),
+          ],
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF251CD9).withOpacity(0.3),
             spreadRadius: 0,
             blurRadius: 10, // Flou augmenté
             offset: const Offset(0, 4), // Décalage léger vers le bas
