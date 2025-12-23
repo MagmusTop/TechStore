@@ -28,7 +28,7 @@ class PageInscription extends GetView<InscriptionController> {
                   "TechStore",
                   style: TextStyle(
                     fontFamily: "Roboto",
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                     fontSize: 24,
                     letterSpacing: 0.5,
                   ),

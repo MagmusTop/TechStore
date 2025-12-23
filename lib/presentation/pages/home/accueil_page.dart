@@ -33,7 +33,6 @@ class AccueilPage extends GetView<AccueilController> {
           ),
         ),
       ),
-   //   bottomNavigationBar: const CustomBottomNavBar(currentRoute: '/home'),
     );
   }
 
@@ -423,7 +422,7 @@ class AccueilPage extends GetView<AccueilController> {
 
   Widget _buildCategoryButton({required String title}) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 15),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [

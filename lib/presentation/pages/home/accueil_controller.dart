@@ -87,24 +87,16 @@ class AccueilController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Ajouter le listener seulement s'il n'est pas déjà attaché
-    if (!bestSellersScrollController.hasListeners) {
-      bestSellersScrollController.addListener(_updateScrollProgress);
-    }
-  }
-
-  void _updateScrollProgress() {
-    if (bestSellersScrollController.hasClients) {
-      final maxScroll = bestSellersScrollController.position.maxScrollExtent;
-      final currentScroll = bestSellersScrollController.offset;
-      scrollProgress.value = maxScroll > 0 ? currentScroll / maxScroll : 0.0;
-      update(); // Notifie GetBuilder
-    }
+    // Écouter le défilement de la liste des meilleures ventes
+    bestSellersScrollController.addListener(() {
+      calculateScrollProgress();
+    });
   }
 
   @override
   void onClose() {
     pageController.dispose();
+    bestSellersScrollController.dispose();
     super.onClose();
   }
 }
